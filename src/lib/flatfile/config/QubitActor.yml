@@ -1,0 +1,66 @@
+# All columns that can be either imported or exported
+columnNames:
+  - legacyId
+  - culture
+  - typeOfEntity
+  - authorizedFormOfName
+  - parallelFormsOfName
+  - standardizedFormsOfName
+  - otherFormsOfName
+  - corporateBodyIdentifiers
+  - datesOfExistence
+  - history
+  - places
+  - legalStatus
+  - functions
+  - mandates
+  - internalStructures
+  - generalContext
+  - descriptionIdentifier
+  - institutionIdentifier
+  - rules
+  - status
+  - levelOfDetail
+  - revisionHistory
+  - sources
+  - maintenanceNotes
+  - actorOccupations
+  - actorOccupationNotes
+  - subjectAccessPoints
+  - placeAccessPoints
+  - digitalObjectURI
+  - digitalObjectChecksum
+  - language
+  - script
+
+direct:
+  - culture
+  - authorizedFormOfName
+  - corporateBodyIdentifiers
+  - datesOfExistence
+  - history
+  - places
+  - legalStatus
+  - functions
+  - mandates
+  - internalStructures
+  - generalContext
+  - descriptionIdentifier
+  - rules
+  - revisionHistory
+  - sources
+  - language
+  - script
+
+map:
+  id:                                legacyId
+  institutionResponsibleIdentifier:  institutionIdentifier
+  descriptionStatus:                 status
+  entityType:                        typeOfEntity
+  descriptionDetail:                 levelOfDetail
+
+property:
+
+note:
+
+cacheTaxonomies:

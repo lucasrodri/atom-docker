@@ -1,0 +1,42 @@
+{
+    "name": "artefactual/accesstomemory",
+    "type": "project",
+    "description": "A web-based, open source application for standards-based archival description.",
+    "keywords": [
+        "archives",
+        "archival-description"
+    ],
+    "license": "AGPL-3.0-only",
+    "config": {
+        "vendor-dir": "vendor/composer"
+    },
+    "require-dev": {
+        "mikey179/vfsstream": "^1.6",
+        "phpunit/phpunit": "^9.5",
+        "friendsofphp/php-cs-fixer": "^3.0"
+    },
+    "require": {
+        "phing/phing": "2.*",
+        "league/csv": "^9.4",
+        "apereo/phpcas": "^1.6.1",
+        "ezyang/htmlpurifier": "^4.13",
+        "ruflin/elastica": "7.*",
+        "jumbojett/openid-connect-php": "^1.0",
+        "geoip2/geoip2": "~2.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AccessToMemory\\test\\": "test/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-debug": [
+            "@putenv XDEBUG_SESSION=1",
+            "phpunit"
+        ],
+        "test-cov": "@php -dpcov.enabled=1 -dpcov.directory=. ./vendor/composer/bin/phpunit --coverage-html=.coverage/html",
+        "test-cov-strict": "@php -dpcov.enabled=1 -dpcov.directory=. ./vendor/composer/bin/phpunit --coverage-html=.coverage/html --strict-coverage",
+        "php-cs-fixer": "php-cs-fixer"
+    }
+}

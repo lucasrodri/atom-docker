@@ -1,0 +1,47 @@
+# Javascript browser verification configuration. Js challenge will be run
+# when 'activated' setting is 'true'.
+# IMPORTANT: The 'salt' value must be changed to a new secret string before
+# activating this feature.
+
+# Toggle the JS challenge feature on/off.
+activated: false
+
+# If true, run headless-browser tests.
+test_headless: true
+
+# Cookie names.
+cookiename_visited:  atom_visited
+cookiename_headless: atom_headless
+cookiename_js:       atom_js
+
+# New dialog‐text settings (optional - these are defaults)
+# dialog_title:       "Verifying Your Browser"
+# dialog_message:     "Hang tight— we're just making sure you're a real person so our community stays safe."
+# redirect_prefix:    "Redirecting in"
+# redirect_suffix:    "second(s)..."
+# noscript_message:   "JavaScript is required for this step. Please enable JavaScript in your browser and try again."
+
+# Paths which always bypass the challenge.
+endpoint_exceptions:
+  - '/api'
+  - '/qtSwordPlugin'
+
+# Secret salt used to sign cookie values.
+salt: 'REPLACE_WITH_SECRET'
+
+# Challenge delay (in seconds) the user will have to wait to pass the challenge.
+delay_seconds: 5
+
+# How many days the “visited” cookie should live.
+cookie_days: 3
+
+# CIDR blocks which always bypass the challenge.
+cidr_exceptions:
+  - '192.168.1.0/24'
+  - '10.0.0.0/8'
+
+# GeoIp is required for user_challenge features. The country and asn filters
+# both require GeoIp to be set up.
+# Paths to the GeoIP2 databases (substitute %SF_ROOT_DIR% or an absolute path):
+geoip_asn_db_path:  '%SF_ROOT_DIR%/geoip/GeoLite2-ASN.mmdb'
+geoip_city_db_path: '%SF_ROOT_DIR%/geoip/GeoLite2-City.mmdb'

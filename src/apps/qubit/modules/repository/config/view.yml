@@ -1,0 +1,21 @@
+browseSuccess:
+  javascripts:
+    /plugins/sfDrupalPlugin/vendor/drupal/misc/tableheader:
+    advancedRepositoryFilters.js:
+
+listSuccess:
+  javascripts:
+    /plugins/sfDrupalPlugin/vendor/drupal/misc/tableheader:
+
+editThemeSuccess:
+  javascripts:
+    /plugins/sfDrupalPlugin/vendor/drupal/misc/collapse:
+    /plugins/sfDrupalPlugin/vendor/drupal/misc/form:
+    /plugins/sfDrupalPlugin/vendor/drupal/misc/textarea:
+    blank:
+    description:
+
+all:
+  components:
+    css:
+      [repository, stylesheet]

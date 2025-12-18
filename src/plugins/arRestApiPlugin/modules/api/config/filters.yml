@@ -1,0 +1,21 @@
+# Inherit filters, cascade mechanism
+history: ~
+rendering: ~
+security: ~
+settings: ~
+QubitLimitIp: ~
+QubitSslRequirement: ~
+QubitMeta: ~
+QubitLimitResults: ~
+
+# Add arRestApiPluginFilter to the chain
+restApiFilter:
+  class: arRestApiPluginFilter
+
+QubitTransaction: ~
+
+QubitCSP:
+  enable: false
+
+cache: ~
+execution: ~

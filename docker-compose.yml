@@ -1,0 +1,86 @@
+services:
+  mysql:
+    image: mysql:8.0
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_0900_ai_ci
+      --sql-mode=ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+      --optimizer-switch=block_nested_loop=off
+    env_file: .env
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpass"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  elasticsearch:
+    image: docker.io/elastic/elasticsearch:7.17.24
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:9200 >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      
+  gearman:
+    image: artefactual/gearmand:1.1.22
+    ports:
+      - "4730:4730"
+    healthcheck:
+      disable: true
+
+  atom:
+    build: .
+    ports:
+      - "8080:80"
+    env_file: .env
+    environment:
+      AUTO_INSTALL: "1"
+    volumes:
+      - ./src:/var/www/atom:delegated
+      - atom_cache:/var/www/atom/cache
+      - atom_uploads:/var/www/atom/uploads
+    depends_on:
+      mysql:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      gearman:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /var/www/atom/.installed"]
+      interval: 10s
+      timeout: 3s
+      retries: 30
+
+  atom-worker:
+    build: .
+    command: ["bash", "-lc", "cd /var/www/atom && php -d memory_limit=-1 symfony jobs:worker"]
+    env_file: .env
+    volumes:
+      - ./src:/var/www/atom:delegated
+      - atom_cache:/var/www/atom/cache
+      - atom_uploads:/var/www/atom/uploads
+    depends_on:
+      atom:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
+  es_data:
+  atom_cache:
+  atom_uploads:
