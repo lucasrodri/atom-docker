@@ -83,6 +83,10 @@ Qualquer variavel do `.env` fica disponivel tanto no container `atom` quanto no 
 - **Worker parado**: confirme que `atom-worker` esta `Up` com `docker compose ps`. Se necessario, reinicie apenas ele com `docker compose restart atom-worker`.
 - **Permissoes quebradas em uploads**: rode `docker compose exec atom chown -R www-data:www-data /var/www/atom/uploads`.
 
+# Atenção
+
+Pode acontecer alguns erros na instalação automática dependendo do ambiente. Recomenda-se que na primeira instalação a pasta src seja copiada diretamente do repositório oficial do AtoM em: https://storage.accesstomemory.org/releases/atom-latest.tar.gz e descompactada na pasta src deste repositório.
+
 ## Referencias
 - Documentacao oficial do AtoM: https://www.accesstomemory.org/en/docs/2.8/
 - Guia do docker compose: https://docs.docker.com/compose/
